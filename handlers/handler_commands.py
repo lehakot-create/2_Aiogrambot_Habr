@@ -1,12 +1,8 @@
 from aiogram import Router
 from aiogram.filters import Command
-from aiogram.filters.text import Text
-from aiogram.types import Message, ReplyKeyboardRemove
+from aiogram.types import Message
 
-# from keyboards.for_questions import get_yes_no_kb
 from handlers.handler import Handler
-
-# router = Router()  # [1]
 
 
 class HandlerCommands(Handler):
@@ -16,17 +12,17 @@ class HandlerCommands(Handler):
 
     def handle(self):
         @self.router.message(Command('start'))
-        async def cmd_start(message: Message):
-            await message.answer(f'Welcome {message.from_user.username}!!!',
-                                 reply_markup=self.kb.get_yes_no_kb())
-            await message.answer(f'Welcome {message.from_user.first_name}!!!',
-                                 reply_markup=self.kb.get_yes_no_kb())
-            await message.answer(f'Welcome {message.from_user.full_name}!!!',
-                                 reply_markup=self.kb.get_yes_no_kb())
-            # self.DB.add_user(user_id=message.from_user.id,
-            #                  username=message.from_user.username,
-            #                  first_name=message.from_user.first_name,
-            #                  full_name=message.from_user.full_name)
+        def cmd_start(message: Message):
+            message.answer(f'Welcome {message.from_user.username}!!!',
+                           reply_markup=self.kb.get_yes_no_kb())
+            message.answer(f'Welcome {message.from_user.first_name}!!!',
+                           reply_markup=self.kb.get_yes_no_kb())
+            message.answer(f'Welcome {message.from_user.full_name}!!!',
+                           reply_markup=self.kb.get_yes_no_kb())
+            self.DB.add_user(user_id=message.from_user.id,
+                             username=message.from_user.username,
+                             first_name=message.from_user.first_name,
+                             full_name=message.from_user.full_name)
 
 # @router.message(Command("start"))  # [2]
 # async def cmd_start(message: Message):

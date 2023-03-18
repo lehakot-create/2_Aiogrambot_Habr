@@ -17,7 +17,9 @@ class MainBot:
         self.dp = Dispatcher()
 
     def start(self):
-        self.dp.include_routers(self.handler.handler_commands.router)
+        self.dp.include_routers(self.handler.handler_commands.router,
+                                self.handler.handler_all_text.router,
+                                self.handler.handler_inline_query.router)
         logging.info('Bot started')
         self.handler.handle()
 

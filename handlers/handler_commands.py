@@ -14,11 +14,7 @@ class HandlerCommands(Handler):
         @self.router.message(Command('start'))
         async def cmd_start(message: Message):
             await message.answer(f'Welcome {message.from_user.username}!!!',
-                                 reply_markup=self.kb.get_yes_no_kb())
-            # message.answer(f'Welcome {message.from_user.first_name}!!!',
-            #                reply_markup=self.kb.get_yes_no_kb())
-            # message.answer(f'Welcome {message.from_user.full_name}!!!',
-            #                reply_markup=self.kb.get_yes_no_kb())
+                                 reply_markup=self.kb.main_kb())
             self.DB.add_user(user_id=message.from_user.id,
                              username=message.from_user.username,
                              first_name=message.from_user.first_name,

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ARRAY
 
 from data_base.dbcore import Base
 
@@ -10,3 +10,4 @@ class User(Base):
     username = Column(String, nullable=True)
     first_name = Column(String, nullable=True)
     full_name = Column(String, nullable=True)
+    themes_id = Column(ARRAY(Integer))

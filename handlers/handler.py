@@ -2,15 +2,16 @@ import abc
 from aiogram import Router
 
 from data_base.dbalchemy import DBManager
-from keyboards.for_questions import Keyboards
+from keyboards.keyboard import Keyboards
+from keyboards.inline_keyboard import InlineKeyboards
 
 
 class Handler(metaclass=abc.ABCMeta):
     def __init__(self, bot):
         self.bot = bot
         self.DB = DBManager()
-        # self.router = Router()
         self.kb = Keyboards()
+        self.inline_kb = InlineKeyboards()
 
     @abc.abstractclassmethod
     def handle(self):

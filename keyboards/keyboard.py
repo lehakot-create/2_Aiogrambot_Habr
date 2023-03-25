@@ -6,16 +6,10 @@ class Keyboards:
     def __init__(self):
         self.markup = None
 
-    def get_yes_no_kb(self) -> ReplyKeyboardMarkup:
-        self.markup = ReplyKeyboardBuilder()
-        self.markup.add(KeyboardButton(text="Да"))
-        self.markup.add(KeyboardButton(text="Нет"))
-        self.markup.adjust(2)
-        return self.markup.as_markup(resize_keyboard=True)
-
     def main_kb(self) -> ReplyKeyboardMarkup:
         self.markup = ReplyKeyboardBuilder()
         self.markup.add(KeyboardButton(text='Получить новости'))
+        self.markup.add(KeyboardButton(text='Все темы'))
         self.markup.add(KeyboardButton(text='Мои подписки'))
-        self.markup.adjust(2)
+        self.markup.adjust(3)
         return self.markup.as_markup(resize_keyboard=True)

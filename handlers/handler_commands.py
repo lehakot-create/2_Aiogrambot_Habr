@@ -15,30 +15,7 @@ class HandlerCommands(Handler):
         async def cmd_start(message: Message):
             await message.answer(f'Welcome {message.from_user.username}!!!',
                                  reply_markup=self.kb.main_kb())
-            self.DB.add_user(user_id=message.from_user.id,
+            self.DB.add_user(user_telegram_id=message.from_user.id,
                              username=message.from_user.username,
                              first_name=message.from_user.first_name,
                              full_name=message.from_user.full_name)
-
-# @router.message(Command("start"))  # [2]
-# async def cmd_start(message: Message):
-#     await message.answer(
-#         "Вы довольны своей работой?",
-#         reply_markup=get_yes_no_kb()
-#     )
-
-
-# @router.message(Text(text="да", ignore_case=True))
-# async def answer_yes(message: Message):
-#     await message.answer(
-#         "Это здорово!",
-#         reply_markup=ReplyKeyboardRemove()
-#     )
-
-
-# @router.message(Text(text="нет", ignore_case=True))
-# async def answer_no(message: Message):
-#     await message.answer(
-#         "Жаль...",
-#         reply_markup=ReplyKeyboardRemove()
-#     )

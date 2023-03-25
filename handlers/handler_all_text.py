@@ -17,18 +17,15 @@ class HandlerAllText(Handler):
         if not result:
             all_themes = self.DB.get_all_themes()
             await message.answer('У вас нет подписок.\nВыберите из списка ниже',
-                           reply_markup=self.inline_kb.inline_list_themes(
+                                 reply_markup=self.inline_kb.inline_list_themes(
                                 all_themes)
                            )
-            """
-            запустить сбор подписок и вернуть возможные варианты
-            """
-
         else:
-            """
-            вернуть из бд все подписки пользователя
-            """
-            print('ok')
+            user_subscribe = self.DB.get_user_subscribe(user_id)
+            await message.answer('Ваши подписки',
+                                 reply_markup=self.inline_kb.user_inline_list_themes(
+                                    user_subscribe
+                                 ))
 
     def handle(self):
         @self.router.message(F.text)
@@ -36,9 +33,12 @@ class HandlerAllText(Handler):
             if message.text == 'Получить новости':
                 await message.answer('Раздел новостей в разработке',
                                      reply_markup=self.kb.main_kb())
+            elif message.text == 'Все темы':
+                await message.answer('Доступные темы',
+                                     reply_markup=self.inline_kb.inline_list_themes(
+                                        self.DB.get_all_themes()
+                                     ))
             elif message.text == 'Мои подписки':
-                await message.answer('Раздел подписки в разработке',
-                                     reply_markup=self.kb.main_kb())
                 await self.get_my_subscribe(
                     user_id=message.from_user.id, message=message
                     )

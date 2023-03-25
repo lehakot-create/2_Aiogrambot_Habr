@@ -1,6 +1,5 @@
 from aiogram import Router
 from aiogram.types import CallbackQuery
-from aiogram.filters.text import Text
 from magic_filter import F
 
 from handlers.handler import Handler
@@ -13,7 +12,8 @@ class HandlerInlineQuery(Handler):
         self.router = Router()
 
     def handle(self):
-        @self.router.callback_query(NumbersCallbackFactory.filter(F.action == 'add'))
+        @self.router.callback_query(
+                NumbersCallbackFactory.filter(F.action == 'add'))
         async def call_inline(callback: CallbackQuery,
                               callback_data: NumbersCallbackFactory):
             await self.DB.add_theme_to_my_subscribe(
@@ -22,11 +22,13 @@ class HandlerInlineQuery(Handler):
                 )
             await callback.answer()
 
-        @self.router.callback_query(NumbersCallbackFactory.filter(F.action == 'delete'))
+        @self.router.callback_query(
+                NumbersCallbackFactory.filter(F.action == 'delete'))
         async def call_inline_del_user_theme(
                 callback: CallbackQuery,
                 callback_data: NumbersCallbackFactory):
-            await callback.message.answer(f'Вы отписались от {callback_data.title}')
+            await callback.message.answer(
+                f'Вы отписались от {callback_data.title}')
 
             self.DB.delete_theme_to_my_subscribe(
                 id_theme=callback_data.id,

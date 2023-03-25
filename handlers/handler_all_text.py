@@ -17,14 +17,16 @@ class HandlerAllText(Handler):
         result = self.DB.get_user_subscribe(user_id)
         if not result:
             all_themes = self.DB.get_all_themes()
-            await message.answer('У вас нет подписок.\nВыберите из списка ниже',
-                                 reply_markup=self.inline_kb.inline_list_themes(
+            await message.answer(
+                'У вас нет подписок.\nВыберите из списка ниже',
+                reply_markup=self.inline_kb.inline_list_themes(
                                 all_themes)
                            )
         else:
             user_subscribe = self.DB.get_user_subscribe(user_id)
-            await message.answer('Ваши подписки',
-                                 reply_markup=self.inline_kb.user_inline_list_themes(
+            await message.answer(
+                'Ваши подписки',
+                reply_markup=self.inline_kb.user_inline_list_themes(
                                     user_subscribe
                                  ))
 
@@ -34,19 +36,19 @@ class HandlerAllText(Handler):
             print(theme.id, theme.title, theme.url)
             my_news = get_habr_news(url_theme=theme.url)
             for el in my_news:
-                await message.answer(f"{el.get('title')}\n https://habr.com{el.get('url')}",
-                                     parse_mode='HTML')
+                await message.answer(
+                    f"{el.get('title')}\n https://habr.com{el.get('url')}",
+                    parse_mode='HTML')
 
     def handle(self):
         @self.router.message(F.text)
         async def get_news(message: Message):
             if message.text == 'Получить новости':
                 await self.get_my_news(message)
-                # await message.answer('Раздел новостей в разработке',
-                #                      reply_markup=self.kb.main_kb())
             elif message.text == 'Все темы':
-                await message.answer('Доступные темы',
-                                     reply_markup=self.inline_kb.inline_list_themes(
+                await message.answer(
+                    'Доступные темы',
+                    reply_markup=self.inline_kb.inline_list_themes(
                                         self.DB.get_all_themes()
                                      ))
             elif message.text == 'Мои подписки':

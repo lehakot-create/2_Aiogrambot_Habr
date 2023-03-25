@@ -95,11 +95,15 @@ class DBManager:
             user.theme.append(theme)
             self.session.add(user)
             self.session.commit()
-            await callback.message.answer(f'Вы подписались на {callback_data.title}')
+            await callback.message.answer(
+                f'Вы подписались на {callback_data.title}'
+                )
         else:
             for theme in user.theme:
                 if theme.id == callback_data.id:
-                    await callback.message.answer(f'Вы уже подписаны на {callback_data.title}')
+                    await callback.message.answer(
+                        f'Вы уже подписаны на {callback_data.title}'
+                        )
                     return None
 
             theme = self.session.query(Themes).filter_by(
@@ -108,9 +112,12 @@ class DBManager:
             user.theme.append(theme)
             self.session.add(user)
             self.session.commit()
-            await callback.message.answer(f'Вы подписались на {callback_data.title}')
+            await callback.message.answer(
+                f'Вы подписались на {callback_data.title}'
+                )
 
-    def delete_theme_to_my_subscribe(self, id_theme: int, user_telegram_id: int):
+    def delete_theme_to_my_subscribe(self, id_theme: int,
+                                     user_telegram_id: int):
         """
         Удаляет id темы из подписки
         """

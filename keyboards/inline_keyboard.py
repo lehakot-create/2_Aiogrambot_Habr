@@ -15,7 +15,7 @@ class InlineKeyboards:
     def __init__(self):
         self.markup = None
 
-    def inline_list_themes(self, themes: list[Themes]):
+    def inline_list_themes(self, themes):
         self.markup = InlineKeyboardBuilder()
         for theme in themes:
             self.markup.button(
@@ -27,7 +27,7 @@ class InlineKeyboards:
         self.markup.adjust(1)
         return self.markup.as_markup()
 
-    def user_inline_list_themes(self, themes: list[Themes]):
+    def user_inline_list_themes(self, themes):
         self.markup = InlineKeyboardBuilder()
         for theme in themes:
             self.markup.button(

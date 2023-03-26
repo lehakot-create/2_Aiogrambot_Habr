@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_habr_news(url_theme: str) -> dict:
+def get_habr_news(url_theme: str):
     habr_url = 'https://habr.com' + url_theme
     lst = []
 

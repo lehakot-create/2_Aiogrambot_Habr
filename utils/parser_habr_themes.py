@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_habr_themes() -> list[dict]:
+def get_habr_themes():
     habr_url = 'https://habr.com/ru/hubs/'
 
     all_themes = []

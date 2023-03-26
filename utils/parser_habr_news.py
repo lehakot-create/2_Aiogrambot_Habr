@@ -18,10 +18,3 @@ def get_habr_news(url_theme: str) -> dict:
             'a', class_='tm-article-snippet__title-link').find('span').text
         lst.append({'url': url, 'title': title})
     return lst
-
-
-# /ru/hub/programming/
-# Программирование
-
-# /ru/hub/python/
-# Python
